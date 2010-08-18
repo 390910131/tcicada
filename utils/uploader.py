@@ -60,3 +60,28 @@ def upload_face(data):
         #    _state['message'] = '还没有选择要上传的文件'
         
         return _state
+
+def make_thumb(im, size=75):
+    u"""
+    summary:
+        生成缩略图
+    params:
+        size 参数传递要生成的缩略图的尺寸(16, 24, 32, 75)
+    author:
+        kimly x <kimlyfly@gmail.com>
+    """
+    width, height = im.size
+    if width == height:
+        region = im
+    else:
+        if width > height:
+            delta = (width - height) / 2
+            box = (delta, 0, delta+height, height)
+        else:
+            delta = (height - width) / 2
+            box = (0, delta, width, delta+width)
+        region = im.crop(box)
+    
+    thumb = region.resize((size, size), Image.ANTIALLAS)
+    return thumb
+            
