@@ -23,7 +23,7 @@ def upload_face(data):
         'message':'',
     }
     if data.size > 0:
-        # try:
+        #try:
         base_im = Image.open(data)
         
         size16 = (16,16)
@@ -48,3 +48,15 @@ def upload_face(data):
             im = make_thumb(im, size[0])
             
             # 检查路径是否存在
+            if not os.path.exists(file_path):
+                os.makedirs(file_path)
+                
+            im.save('%s/%s' % (file_path, file_name))
+        
+        _state['success'] = True
+        _state['message'] = file_sub_path + file_name
+        #except:
+        #    _state['success'] = False
+        #    _state['message'] = '还没有选择要上传的文件'
+        
+        return _state
