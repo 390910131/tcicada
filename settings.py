@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for cicada project.
 
 DEBUG = True
@@ -11,8 +12,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': './db/cicada.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -29,9 +30,34 @@ DATABASES = {
 # system time zone.
 TIME_ZONE = 'America/Chicago'
 
+# 网站信息设置
+APP_DOMAIN = 'http://127.0.0.1:8000/'
+APP_NAME = 'CiCaDa'
+APP_VERSION = '0.1.0'
+APP_COMPANY = 'Kimly Team'
+APP_LICENSE = 'GUN General Public License v2'
+
+# 全局分页的每页信息条数
+PAGE_SIZE = 4
+# 管理后台列表每页信息条数
+ADMIN_PAGE_SIZE = 20
+# 网友空间的好友列表信息条数限制
+FRIEND_LIST_MAX = 10
+# Feed相关设置
+FEED_ITEM_MAX = 20
+# Email 服务器设置
+EMAIL_HOST = 'smtp.foxmail.com'
+EMAIL_HOST_PASSWORD = '123123'
+EMAIL_HOST_USER = 'huacnlee@foxmail.com'
+EMAIL_SUBJECT_PREFIX = '[Tmitter]'
+# 网站默认编码
+DEFAULT_CHARSET = "utf-8"
+# 用户默认头像
+DEFAULT_FACE = '/images/face%d.png'
+
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 SITE_ID = 1
 
@@ -45,12 +71,12 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = './statics/uploads/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/uploads/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -80,6 +106,7 @@ ROOT_URLCONF = 'cicada.urls'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
+    './templates',
     # Don't forget to use absolute paths, not relative paths.
 )
 
@@ -90,5 +117,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
+    'cicada.mvc',
 )
