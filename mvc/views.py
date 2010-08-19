@@ -254,26 +254,26 @@ def index_user_page(request, _username, _page_index):
             # Get all user message
             _notes = Note.objects.order_by('-addtime')
         
-        # Page bar
-        _page_bar = formatter.pagebar(_notes, _page_index, _username)
-        # Get current page
-        _notes = _notes[_offset_index:_last_item_index]
-        #Body content
-        _template = loader.get_template('index.html')
+    # Page bar
+    _page_bar = formatter.pagebar(_notes, _page_index, _username)
+    # Get current page
+    _notes = _notes[_offset_index:_last_item_index]
+    #Body content
+    _template = loader.get_template('index.html')
         
-        _context = Context({
-            'page_title':_page_title,
-            'notes':_notes,
-            'islogin':_islogin,
-            'userid':__user_id(request),
-            'self_home':_self_home,
-            'user':_user,
-            'page_bar':_page_bar,
-            'friends':_friends,
-            'login_user_friend_list':_login_user_friend_list,
-        })
-        _output = _template.render(_context)
-        return HttpResponse(_output)
+    _context = Context({
+        'page_title':_page_title,
+        'notes':_notes,
+        'islogin':_islogin,
+        'userid':__user_id(request),
+        'self_home':_self_home,
+        'user':_user,
+        'page_bar':_page_bar,
+        'friends':_friends,
+        'login_user_friend_list':_login_user_friend_list,
+    })
+    _output = _template.render(_context)
+    return HttpResponse(_output)
     
 # detail view
 def detail(request, _id):
