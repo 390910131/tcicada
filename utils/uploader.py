@@ -1,4 +1,4 @@
-# -*- coding;utf-8 -*-
+# -*- coding:utf-8 -*-
 # 上传文件
 import sys, os
 import time

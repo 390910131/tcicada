@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.core import serializers
 from cicada.settings import *
-from cicada.mvc,models import Note, User, Category, Area
+from cicada.mvc.models import Note, User, Category, Area
 from cicada.mvc.feed import RSSRecentNotes, RSSUserRecentNotes
 from cicada.utils import mailer, formatter, function, uploader
 
@@ -255,7 +255,7 @@ def index_user_page(request, _username, _page_index):
             _notes = Note.objects.order_by('-addtime')
         
         # Page bar
-        _page_bar = fromatter.pagebar(_notes, _page_index, _username)
+        _page_bar = formatter.pagebar(_notes, _page_index, _username)
         # Get current page
         _notes = _notes[_offset_index:_last_item_index]
         #Body content

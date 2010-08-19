@@ -61,7 +61,7 @@ def pagebar(objects, page_index, username='', tempate='control/home_pagebar.html
         tempate = 'control/user_pagebar.html'
     return render_to_response(tempate, {
         'paginator':_paginator,
-        'username':username
+        'username':username,
         'has_pages':_paginator.num_pages > 1,
         'has_next':_paginator.page(page_index).has_next(),
         'has_prev':_paginator.page(page_index).has_previous(),

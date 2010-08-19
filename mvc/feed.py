@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from django.contrib.syndication.fedds import Feed, FeedDoesNotExist
+from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 from cicada.mvc.models import Note, User
 from cicada.utils import formatter

@@ -3,7 +3,7 @@ import time
 from django.db import models, connection
 from django.contrib import admin
 from django.utils import timesince, html
-from cicada.utils import formatter, function
+from cicada.utils import function, formatter
 from cicada.settings import *
 
 # Create your models here.
