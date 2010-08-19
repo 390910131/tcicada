@@ -84,7 +84,7 @@ def __check_username_exist(_username):
     try:
         _user = User.objects.get(username=_username)
         _exist = True
-    except User.DoseNotExist:
+    except:
         _exist = False
     return _exist
 
@@ -143,7 +143,7 @@ def __do_signup(request, _userinfo):
         #_state['success'] = False
         #_state['message'] = u'程序异常，注册失败.'
     # send regist success mail
-    mailer.send_regist_success_mail(_userinfo)
+    mailer.send_register_success_mail(_userinfo)
     
     return _state
 
@@ -156,7 +156,7 @@ def __result_message(request, _title=u'消息', _message='程序有异常，操�
         _go_back_url = function.get_referer_url(request)
     
     # body content
-    _template = loader.get_template('result_messaage.html')
+    _template = loader.get_template('result_message.html')
     _context = Context({
         'page_title':_title,
         'message':_message,
@@ -207,14 +207,14 @@ def index_user_page(request, _username, _page_index):
         if not _islogin:
             return HttpResponseRedirect('/signin/')
         # save message
-        (_category, _is_added_cate) = Category.objects.get_or_create(name=u'网页')
+        _category = Category.objects.get_or_create(name=u'网页')
         try:
             _user = User.objects.get(id=__user_id(request))
         except:
             return HttpResponseRedirect('/signin/')
         
         _note = Note(message=_message, category=_category, user=_user)
-        _note.save()
+        _note.save(self, *args, **kwargs)
         return HttpResponseRedirect('/user/' + _user.username)
     
     _userid = -1
@@ -224,7 +224,7 @@ def index_user_page(request, _username, _page_index):
     _login_user_friend_list = None
     if _islogin:
         # Get friend message if user is logined
-        _login_user = User.objects.get(username=_user_name(request))
+        _login_user = User.objects.get(username=__user_name(request))
         _login_user_friend_list = _login_user.friend.all()
     else:
         _login_user = None
@@ -278,7 +278,7 @@ def index_user_page(request, _username, _page_index):
 # detail view
 def detail(request, _id):
     # Get user login status
-    _islogin = _is_login(request)
+    _islogin = __is_login(request)
     _note = get_object_or_404(Note, id=_id)
     # body content
     _template = loader.get_template('detail.html')
