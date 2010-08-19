@@ -265,7 +265,7 @@ def index_user_page(request, _username, _page_index):
             'page_title':_page_title,
             'notes':_notes,
             'islogin':_islogin,
-            'userid':_user_id(request),
+            'userid':__user_id(request),
             'self_home':_self_home,
             'user':_user,
             'page_bar':_page_bar,
@@ -317,21 +317,22 @@ def signin(request):
     # Check username and password
     if _is_post:
         _state = __do_login(request, _username, _password)
+        
         if _state['success']:
             return __result_message(request, u'登录成功', u'恭喜，您已经登录成功')
-        else:
-            _state = {
-                'success':False,
-                'message':u'请登录'
-            }
-        # Body content
-        _template = loader.get_template('signin.html')
-        _context = Context({
-            'page_title':u'登录',
-            'state':_state,            
-        })
-        _output = _template.render(_context)
-        return HttpResponse(_output)
+    else:
+        _state = {
+            'success':False,
+            'message':u'请登录'
+        }
+    # Body content
+    _template = loader.get_template('signin.html')
+    _context = Context({
+        'page_title':u'登录',
+        'state':_state,            
+    })
+    _output = _template.render(_context)
+    return HttpResponse(_output)
 
 def signup(request):
     # Check is login
