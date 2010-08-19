@@ -324,7 +324,7 @@ def signin(request):
         _state = {
             'success':False,
             'message':u'请登录'
-        }
+            }
     # Body content
     _template = loader.get_template('signin.html')
     _context = Context({
