@@ -1,0 +1,1 @@
+一个类似twitter的系统，基于python  + Django
